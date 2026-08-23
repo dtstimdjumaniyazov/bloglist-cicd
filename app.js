@@ -20,6 +20,7 @@ mongoose
     logger.error('error to connection to MongoDB', error.message)
   })
 
+app.use(express.static('frontend/dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 
@@ -32,6 +33,10 @@ if (process.env.NODE_ENV === 'test') {
   const testingRouter = require('./controllers/testing')
   app.use('/api/testing', testingRouter)
 }
+
+app.get('/*splat', (req, res) => {
+  res.sendFile('index.html', { root: 'frontend/dist' })
+})
 
 app.use(middleware.unknowEndpoint)
 app.use(middleware.errorHandler)

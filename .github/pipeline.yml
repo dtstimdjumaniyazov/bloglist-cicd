@@ -1,0 +1,36 @@
+name: Deployment
+
+on:
+  push:
+    - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  build_and_test:
+    run-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Install BACKEND dependencies
+        run: npm install
+      - name: Install FRONTEND dependencies
+        run: npm install
+        working-diretory: frontend
+      - name: Install e2e dependencies
+        run: npm install
+        working-diretory: e2e-tests
+      - name: Check BACKEND style
+        run: npm run eslint
+      - name: Check FRONTEND style
+        run: npm run eslint
+        working-diretory: frontend
+      - name: Build
+        run: npm run build
+        working-diretory: frontend
+      - name: Run E2E test
+        run: npm run test
+        working-diretory: e2e-tests

@@ -1,5 +1,5 @@
 const { test, expect, beforeEach, describe } = require('@playwright/test')
-import { loginWith, createBlog } from '../helper'
+import { baseUrl, loginWith, createBlog } from '../helper'
 
 const testUser = {
     username: 'e2eTest',
@@ -15,9 +15,9 @@ const testBlog = {
 
 describe('Blog app', () => {
     beforeEach(async ({ page, request }) => {
-        await request.post('http://localhost:3001/api/testing/reset')
-        await request.post('http://localhost:3001/api/users', { data: testUser })
-        await page.goto('http://localhost:5173/login')
+        await request.post(`${baseUrl}/api/testing/reset`)
+        await request.post(`${baseUrl}/api/users`, { data: testUser })
+        await page.goto(`${baseUrl}/login`)
     })
 
     test('login succeeds with correct credentials', async ({ page }) => {

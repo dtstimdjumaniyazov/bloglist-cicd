@@ -1,3 +1,5 @@
+const baseUrl = 'http://localhost:3001'
+
 const loginWith = async (page, username, password) => {
     await page.getByRole('textbox', {name: 'username'}).fill(username)
     await page.getByRole('textbox', {name: 'password'}).fill(password)
@@ -23,7 +25,7 @@ const expandAndLikeBlog = async (page, titleBlog, likeQuantity = 1) => {
         await likeButton.click()
         await page.waitForTimeout(500)
     }
-    await page.goto('http://localhost:5173/blogs')
+    await page.goto(`${baseUrl}/blogs`)
 }
 
 
@@ -34,4 +36,4 @@ const expandBlogAndDelete = async (page, titleBlog) => {
 }
 
 
-export { loginWith, createBlog, expandAndLikeBlog, expandBlogAndDelete }
+export { baseUrl, loginWith, createBlog, expandAndLikeBlog, expandBlogAndDelete }
