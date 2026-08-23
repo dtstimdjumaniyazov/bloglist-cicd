@@ -55,7 +55,7 @@ const App = () => {
   const handleCreate = async (newBlog) => {
     try {
       const createdBlog = await blogService.create(newBlog)
-      setBlogs(blogs.concat({...createdBlog, user: { name: user.name, id: createdBlog.user }}))
+      setBlogs(blogs.concat({ ...createdBlog, user: { name: user.name, id: createdBlog.user } }))
       setMessage(`a new blog ${newBlog.title} by ${JSON.parse(localStorage.getItem('loggedBlogappUser')).username} added`)
       setTimeout(() => {
         setMessage(null)
@@ -68,7 +68,7 @@ const App = () => {
       }, 5000)
       console.error('Error in handleCreate', error)
     }
-    
+
   }
 
   const handleLike = async (id, blog) => {
@@ -105,12 +105,12 @@ const App = () => {
     <Container>
       <AppBar position="static">
         <Toolbar position="static">
-          <Button color='inherit'><Link style={{margin: '5px'}} to="/">Blogs</Link></Button>
-          <Button color='inherit'><Link style={{margin: '5px'}} to='/create-blog'>new blog</Link></Button>
+          <Button color='inherit'><Link style={{ margin: '5px' }} to="/">Blogs</Link></Button>
+          <Button color='inherit'><Link style={{ margin: '5px' }} to='/create-blog'>new blog</Link></Button>
           {
-            user 
+            user
               ? <Button color='inherit' onClick={handleLogout}>Logout</Button>
-              : <Button color='inherit'><Link style={{margin: '5px'}} to="/login">Login</Link></Button>
+              : <Button color='inherit'><Link style={{ margin: '5px' }} to="/login">Login</Link></Button>
           }
         </Toolbar>
       </AppBar>
@@ -124,10 +124,10 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route style={{margin: '5px'}} path='/' element={<BlogList blogs={blogs} user={user}/>} />
+        <Route style={{ margin: '5px' }} path='/' element={<BlogList blogs={blogs} user={user}/>} />
         <Route path='/blogs/:id' element={<BlogDetails blogs={blogs} addLike={handleLike} remove={handleRemove} user={user} />}/>
         <Route path='/create-blog' element={<NewBlogForm createBlog={handleCreate} />} />
-        <Route style={{margin: '5px'}} path='/login' element={<LoginForm message={setErrorMessage} setUser={setUser} />} />
+        <Route style={{ margin: '5px' }} path='/login' element={<LoginForm message={setErrorMessage} setUser={setUser} />} />
       </Routes>
     </Container>
   )
