@@ -2,7 +2,7 @@ name: Deployment
 
 on:
   push:
-    - main
+    branches: [main]
   pull_request:
     branches: [main]
     types: [opened, synchronize]
@@ -19,18 +19,18 @@ jobs:
         run: npm install
       - name: Install FRONTEND dependencies
         run: npm install
-        working-diretory: frontend
+        working-directory: frontend
       - name: Install e2e dependencies
         run: npm install
-        working-diretory: e2e-tests
+        working-directory: e2e-tests
       - name: Check BACKEND style
         run: npm run eslint
       - name: Check FRONTEND style
         run: npm run eslint
-        working-diretory: frontend
+        working-directory: frontend
       - name: Build
         run: npm run build
-        working-diretory: frontend
+        working-directory: frontend
       - name: Run E2E test
         run: npm run test
-        working-diretory: e2e-tests
+        working-directory: e2e-tests
