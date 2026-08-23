@@ -24,9 +24,9 @@ jobs:
         run: npm install
         working-directory: e2e-tests
       - name: Check BACKEND style
-        run: npm run eslint
+        run: npm run lint
       - name: Check FRONTEND style
-        run: npm run eslint
+        run: npm run lint
         working-directory: frontend
       - name: Build
         run: npm run build
