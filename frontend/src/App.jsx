@@ -122,7 +122,6 @@ const App = () => {
       <div>
         <Notification message={errorMessage} severity="error"/>
       </div>
-
       <Routes>
         <Route style={{ margin: '5px' }} path='/' element={<BlogList blogs={blogs} user={user}/>} />
         <Route path='/blogs/:id' element={<BlogDetails blogs={blogs} addLike={handleLike} remove={handleRemove} user={user} />}/>
